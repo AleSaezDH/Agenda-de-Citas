@@ -1,20 +1,51 @@
-import React from 'react'
+import React from 'react';
+import {IconButton, Paper, Accordion, AccordionSummary, AccordionDetails, Typography} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { makeStyles } from '@material-ui/core/styles';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function Citas ({citas, eliminarCita}) {
 
-    return <>
-    {citas.length !== 0 ? <h1>Citas Pendientes</h1> : <h1>Sin Citas</h1>}
-    {citas.map(cita => (
-    <div className='cita' style={{marginBottom:30}}>
-        <p>Mascota: <span> {cita.mascota} </span></p>
-        <p>Dueño: <span> {cita.propietario} </span></p>
-        <p>Fecha: <span> {cita.fecha} </span></p>
-        <p>Hora: <span> {cita.hora} </span></p>
-        <p>Síntomas: <span> {cita.sintomas} </span></p>
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          width: '100%',
+        },
+        heading: {
+          fontSize: theme.typography.pxToRem(15),
+          flexBasis: '33.33%',
+          flexShrink: 0,
+        },
+        secondaryHeading: {
+          fontSize: theme.typography.pxToRem(15),
+          color: theme.palette.text.secondary,
+        },
+      }));
 
-        <button className='button eliminar u-full-width' onClick={() => eliminarCita(cita.id)}>Eliminar</button>
+      const classes = useStyles();
+
+    return <div style={{display:'flex', flexDirection:'column', width:'50%', textAlign:'center', marginLeft:25, marginRight:50}}>
+        <Paper elevation={3}>
+        {citas.length !== 0 ? <Typography variant="h4" style={{marginTop:15, marginBottom:30}}> Citas pendientes </Typography> : <Typography variant="h4" style={{marginTop:15, marginBottom:15}}> Sin citas </Typography>}
+        {citas.map(cita => (
+        <div className={classes.root}>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+            <Typography className={classes.heading}>{cita.mascota}</Typography>
+            <Typography className={classes.secondaryHeading} style={{marginLeft:140}}>{cita.fecha} {cita.hora}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+                <div style={{display:'flex', flexDirection:'column', textAlign:'left', marginLeft:30}}>
+                    <p>Dueño: {cita.propietario}</p>
+                    <p>Síntomas: {cita.sintomas}</p>
+                </div>
+                <IconButton style={{marginLeft:500}} area-label='delete'><DeleteIcon color='error' style={{cursor:'pointer'}} onClick={() => eliminarCita(cita.id)} /></IconButton>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+        ))}
+    </Paper>
     </div>
-    ))}
-    </>
 }
 export default Citas;

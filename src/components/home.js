@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Formulario from './formulario';
 import Citas from './citas';
+import Snackbarr from './snackbar';
 
 function Home () {
+
+    const [alerta, setAlerta] = useState('');
 
     let citasGuardadas = JSON.parse(localStorage.getItem('citas'));
 
@@ -27,20 +30,20 @@ function Home () {
     const eliminarCita = (id) => {
         let nuevasCitas = citas.filter(x => x.id !== id);
         setCitas(nuevasCitas);
+        setAlerta('info');
+    }
+
+    function modificarAlerta (dato) {
+        console.log(dato);
+        setAlerta(dato);
     }
 
     return (<>
-        <h1>Administrador de Pacientes</h1>
-        <div className='container'>
-          <div className='row'>
-            <div className='one-half column'>
+        <div style={{display:'flex', justifyContent:'space-around', marginTop:50}}>
               <Formulario agregarCitas={agregarCitas}/>
-            </div>
-            <div className='one-half column'>
               <Citas citas={citas} eliminarCita={eliminarCita}/>
-            </div>
-          </div>
         </div>
+              {alerta === 'info' ? <Snackbarr valor={'info'} modificarAlerta={modificarAlerta}/> : null}
         </>
     )
 }
