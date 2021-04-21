@@ -49,7 +49,6 @@ function Formulario ({agregarCitas}) {
     }
 
     function modificarAlerta (dato) {
-        console.log(dato);
         setAlerta(dato);
     }
 

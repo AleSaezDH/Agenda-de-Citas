@@ -1,6 +1,5 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
-import Button from '@material-ui/core/Button';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -38,7 +37,7 @@ function Snackbarr (props) {
               {props.valor === 'success' ? 
                           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                           <Alert onClose={handleClose} severity="success">
-                            Cinta creada con éxito!
+                            Cita creada con éxito!
                           </Alert>
                         </Snackbar>
             : null}
