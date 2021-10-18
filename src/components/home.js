@@ -34,7 +34,6 @@ function Home () {
     }
 
     function modificarAlerta (dato) {
-        console.log(dato);
         setAlerta(dato);
     }
 

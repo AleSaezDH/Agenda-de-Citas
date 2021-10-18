@@ -5,8 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 function Snackbarr (props) {
 
-    console.log(props);
-
     function Alert(props) {
         return <MuiAlert elevation={6} variant="filled" {...props} />;
       }
@@ -35,7 +33,7 @@ function Snackbarr (props) {
         return (
           <div className={classes.root}>
               {props.valor === 'success' ? 
-                          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                          <Snackbar data-testid="success" open={open} autoHideDuration={6000} onClose={handleClose}>
                           <Alert onClose={handleClose} severity="success">
                             Cita creada con éxito!
                           </Alert>
@@ -43,7 +41,7 @@ function Snackbarr (props) {
             : null}
 
             {props.valor === 'warning' ? 
-                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Snackbar data-testid="warning" open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity="warning">
                           Completa todos los campos
                         </Alert>
@@ -51,7 +49,7 @@ function Snackbarr (props) {
         : null}
 
             {props.valor === 'info' ? 
-                          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                          <Snackbar  data-testid="info" open={open} autoHideDuration={6000} onClose={handleClose}>
                           <Alert onClose={handleClose} severity="success">
                             Cinta eliminada con éxito!
                           </Alert>

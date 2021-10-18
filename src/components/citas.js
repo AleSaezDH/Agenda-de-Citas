@@ -3,6 +3,7 @@ import {IconButton, Paper, Accordion, AccordionSummary, AccordionDetails, Typogr
 import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import PropTypes from 'prop-types';
 
 function Citas ({citas, eliminarCita}) {
 
@@ -23,11 +24,11 @@ function Citas ({citas, eliminarCita}) {
 
       const classes = useStyles();
 
-    return <div style={{display:'flex', flexDirection:'column', width:'50%', textAlign:'center', marginLeft:25, marginRight:50}}>
+    return <div data-testid="cita" style={{display:'flex', flexDirection:'column', width:'50%', textAlign:'center', marginLeft:25, marginRight:50}}>
         <Paper elevation={3}>
         {citas.length !== 0 ? <Typography variant="h4" style={{marginTop:15, marginBottom:30}}> Citas pendientes </Typography> : <Typography variant="h4" style={{marginTop:15, marginBottom:15}}> Sin citas </Typography>}
         {citas.map(cita => (
-        <div className={classes.root}>
+        <div data-testid="eachCita" className={classes.root}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
             <Typography className={classes.heading}>{cita.mascota}</Typography>
@@ -47,5 +48,10 @@ function Citas ({citas, eliminarCita}) {
         ))}
     </Paper>
     </div>
+}
+
+Citas.propTypes = {
+  citas: PropTypes.array.isRequired,
+  eliminarCita: PropTypes.func.isRequired
 }
 export default Citas;
